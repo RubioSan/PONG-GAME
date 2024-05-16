@@ -13,18 +13,18 @@ body {
   border: 5px solid black;
   left: 0;
   position: absolute;
-  background-image: url("paper.gif");
+  background-image: url("room.jpg");
   background-size: cover;
 }
 
 #left-paddle {
-  background-color: yellow;
+  background-color: pink;
   left: 10px;
   height: 25px;
 }
 
 #right-paddle {
-  background-color: yellow;
+  background-color: pink;
   right: 10px;
 }
 
@@ -75,7 +75,7 @@ body {
 .ball {
   width: 15px;
   height: 15px;
-  background-color: yellow;
+  background-color: deeppink;
   border-radius: 10px;
   position: absolute;
   left: 50px;
