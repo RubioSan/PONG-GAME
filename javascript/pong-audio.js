@@ -10,7 +10,10 @@ class soundFile {
     this.player = new Tone.Player({
       url: "./sounds/" + file,
       loop: false,
-      autostart: false
+      autostart: false,
+      onload: () => {
+        console.log(`${file} loaded`);
+      }
     }).toMaster();
   }
 
@@ -21,14 +24,17 @@ class soundFile {
       this.deferPlay = false;
       this.player.stop();
       this.player.start();
+      console.log(`${this.player.buffer.url} playing`);
     } else {
       this.deferPlay = true;
+      console.log(`${this.player.buffer.url} deferred`);
     }
   }
 
   // Stop function that may have easier syntax
   stop() {
     this.player.stop();
+    console.log(`${this.player.buffer.url} stopped`);
   }
 }
 
