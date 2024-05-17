@@ -1,21 +1,22 @@
-/*This File creates the sound file players and their default properties
+/* This File creates the sound file players and their default properties
 If you create a new player, be sure to import it at the top of index.js!
 */
 
-//import * as Tone from "../lib/Tone.js";
+// import * as Tone from "../lib/Tone.js";
 
 class soundFile {
-  constructor(file, deferPlay) {
-    //this.deferPlay = false;
+  constructor(file, deferPlay = false) {
+    this.deferPlay = deferPlay;
     this.player = new Tone.Player({
       url: "./sounds/" + file,
       loop: false,
       autostart: false
     }).toMaster();
   }
-  //Play function also with pre-stop and deferred playing
+
+  // Play function with pre-stop and deferred playing
   play() {
-    //defer playback if sound isn't finished loading
+    // Defer playback if sound isn't finished loading
     if (this.player.loaded === true) {
       this.deferPlay = false;
       this.player.stop();
@@ -24,13 +25,14 @@ class soundFile {
       this.deferPlay = true;
     }
   }
-  //Stop function that may have easier syntax
+
+  // Stop function that may have easier syntax
   stop() {
     this.player.stop();
   }
 }
 
-//Try to play sounds that had their playback deferred
+// Try to play sounds that had their playback deferred
 export function playDeferredSounds() {
   for (var i = 0; i < soundArray.length; i++) {
     if (soundArray[i].deferPlay === true) {
@@ -39,12 +41,12 @@ export function playDeferredSounds() {
   }
 }
 
-export var soundArray = []; //list of sounds loaded
+export var soundArray = []; // List of sounds loaded
 
-//Here is where all the Sound File Players Start
+// Here is where all the Sound File Players Start
 
-export var wallSound = new soundFile("silence.mp3"); //load sound
-soundArray.push(wallSound); //add sound to list of sounds
+export var wallSound = new soundFile("silence.mp3"); // Load sound
+soundArray.push(wallSound); // Add sound to list of sounds
 
 export var paddleSound = new soundFile("silence.mp3");
 soundArray.push(paddleSound);
@@ -54,15 +56,20 @@ soundArray.push(scoreSound);
 
 export var ambientSound = new soundFile("brown.mp3");
 soundArray.push(ambientSound);
-ambientSound.player.loop = true; //turn on looping
-ambientSound.player.volume.value = -20; //turn down volume
+ambientSound.player.loop = true; // Turn on looping
+ambientSound.player.volume.value = -20; // Turn down volume
 
-export var adventureMusic = new soundFile("yyu - eggo.mp3");
+export var adventureMusic = new soundFile("yyu - eggo.mp3", true); // Set deferPlay to true
 soundArray.push(adventureMusic);
 adventureMusic.player.loop = true;
-adventureMusic.player.volume.value = +4;
+adventureMusic.player.volume.value = 0;
 
 export var villageMusic = new soundFile("silence.mp3");
 soundArray.push(villageMusic);
 villageMusic.player.loop = true;
 villageMusic.player.volume.value = -16;
+
+// Adding the event listener to call playDeferredSounds on page load
+document.addEventListener("DOMContentLoaded", function() {
+  playDeferredSounds();
+});
