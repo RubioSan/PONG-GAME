@@ -53,9 +53,11 @@ export var soundArray = []; // List of sounds loaded
 
 export var wallSound = new soundFile("woof.wav"); // Load sound
 soundArray.push(wallSound); // Add sound to list of sounds
+wallSound.player.volume.value = 3; 
 
 export var paddleSound = new soundFile("meow.wav");
 soundArray.push(paddleSound);
+paddleSound.player.volume.value = 3;
 
 export var scoreSound = new soundFile("silence.mp3");
 soundArray.push(scoreSound);
